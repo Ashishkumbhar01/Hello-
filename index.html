@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="main">
+      <header>
+        <div class="container">
+          <a href="javascript:void(0)" class="logo">{Coding Curry}</a>
+          <nav>
+            <ul>
+              <li><i class="fa fa-phone"></i>+91-9650601894</li>
+              <li><i class="fa fa-envelope"></i>codingcurry01@gmail.com</li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <section class="video-outer">
+        <video id="myVideo" loop autoplay>
+          <source src="demovideo.mp4" type="video/mp4" />
+        </video>
+        <div class="form-area-outer">
+          <div class="form-area-inner">
+            <h2>Get in touch with us!</h2>
+            <form id="myform">
+              <input type="text" id="uname" placeholder="User Name" />
+              <input type="email" id="emailadd" placeholder="Email Address" />
+              <input type="tel" id="telnum" placeholder="Mobile Number" />
+              <textarea id="mymessage" placeholder="Message"></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+    <script src="js/annyang.min.js"></script>
+    <script>
+      if (annyang) {
+        var commands = {
+          "play video": function () {
+            document.getElementById('myVideo').play();
+          },
+          "pause video": function () {
+            document.getElementById('myVideo').pause();
+          },
+          "night mode": function(){
+            let root = document.documentElement;  
+            root.style.setProperty('--white', '#000');
+            root.style.setProperty('--black', '#fff');
+            console.log("night mode");
+          },
+          "day mode": function(){
+            let root = document.documentElement;  
+            root.style.setProperty('--white', '#fff');
+            root.style.setProperty('--black', '#000');
+            console.log("day mode");
+          },
+          'write username *tag':function(variable){
+              let uname = document.getElementById("uname");
+              uname.value=variable;
+          },
+          'write email *tag':function(variable){
+              let emailadd = document.getElementById("emailadd");
+              emailadd.value=variable.split(" ").join("");
+          },
+          'write mobile *tag':function(variable){
+              let mobnum = document.getElementById("telnum");
+              mobnum.value=variable;
+          },
+          'write message *tag':function(variable){
+              let mymessage = document.getElementById("mymessage");
+              mymessage.value=variable;
+          },
+          "submit form": function(e){
+            let myform = document.getElementById("myform");  
+            let formareainner = document.querySelector('.form-area-inner');  
+            let formheading = document.querySelector('.form-area-inner h2'); 
+            myform.remove();
+            formheading.innerHTML = 'Your Form is successfully submitted'
+            let html = '';
+            html += `<p>Thanks for submitting your query. We  will shortly contact you.</p>`;
+            formareainner.innerHTML += html;
+
+
+            
+          }
+          
+        };
+
+        // Add our commands to annyang
+        annyang.addCommands(commands);
+
+        // Start listening. You can call this here, or attach this call to an event, button, etc.
+        annyang.start();
+      }
+    </script>
+  </body>
+</html>
