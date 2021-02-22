@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<title></title>
+<style type="text/css">
+*{
+padding:0;
+margin:0;
+box-sizing:border-box;
+}
+ body {
+ margin:auto;
+ padding:10% 0;
+width:100%;
+height:100vh;
+overflow:hidden;
+background:#111;
+background-repeat:no-repeat;
+background-size:cover;
+color:white;
+}
+#controler {
+width:90%;
+height:80vh;
+border:white 2px solid;
+border-radius:2rem;
+margin:auto;
+display:grid;
+place-item:center;
+background:rgb(30,50,100);
+
+}
+#btnPause {
+margin:auto;
+width:80px;
+height:40px;
+background:none;
+font-weight:bold;
+color:white;
+font-size:20px;
+cursor:pointer;
+border:white 2px solid;
+border-radius:8px;
+}
+#btnNext {
+margin:auto;
+width:80px;
+height:40px;
+background:none;
+font-weight:bold;
+color:white;
+font-size:20px;
+cursor:pointer;
+border:white 2px solid;
+border-radius:8px;
+}
+#btnPre {
+margin:auto;
+width:80px;
+height:40px;
+background:none;
+font-weight:bold;
+color:white;
+font-size:20px;
+cursor:pointer;
+border:white 2px solid;
+border-radius:8px;
+}
+h2 {
+text-align:center;
+color:aqua;
+position:relative;
+top:-20px;
+}
+img{
+width:200px;
+height:200px;
+border-radius:50%;
+margin:auto;
+}
+
+.anime {
+animation:animes 3s linear infinite;
+}
+@keyframes animes{
+100%{transform:rotate(360deg);}
+}
+.cont {
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+</style>
+</head>
+<body>
+<h2>Music Player</h2>
+<div id="controler">
+<img src="download/image.jpg">
+<div class="cont">
+<input type="button"  id="btnPre" onclick="Pre()" value="Prev"/>
+<input type="button"  id="btnPause" onclick="PausePlay()" value="Play"/>
+<input type="button"  id="btnNext" onclick="Next()" value="Next"/>
+</div>
+</div>
+<script type="text/javascript">
+var btn = document.getElementById("btnPause");
+var img = document.querySelector("img");
+var songs = [
+"download/vahem.mp3",
+"download/tu mera nahi.mp3",
+"download/dil mera chahe.mp3",
+"download/mera pyar Tera pyar.mp3"
+];
+
+var song = new Audio();
+var currentSong = 0;
+window.onload = playSong;
+
+function playSong() {
+song.src = songs[currentSong];
+song.play();
+}
+
+
+function PausePlay(){
+if(song.paused){
+song.play();
+btn.value = "Pause";
+img.classList.add("anime");
+} else if (song.ended) {
+song.currentTime = 0;
+song.play();
+btn.value = "Pause";
+img.classList.add("anime");
+}else{
+song.pause();
+btn.value = "Play";
+img.classList.remove("anime");
+}
+};
+
+function Next(){
+currentSong++;
+if(currentSong > 3){
+currentSong = 0;
+}
+playSong();
+btn.value = "Pause";
+img.classList.add("anime");
+};
+
+function Pre(){
+currentSong--;
+if(currentSong < 0){
+currentSong = 3;
+}
+btn.value = "Pause";
+img.classList.add("anime");
+playSong();
+};
+</script>
+</body>
+</html>
